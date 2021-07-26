@@ -13,7 +13,9 @@ class category_controller extends Controller
     //
 
     public function allCat(){
-    	return view('admin.category.index');
+
+    	$categories = Category::latest()->get();
+    	return view('admin.category.index', compact('categories'));
     }
 
 
@@ -23,12 +25,21 @@ class category_controller extends Controller
 	    ]);
 
 
-	    //Inserting With eloqouent orm
+	    //Inserting With eloqouent orm Method 1
 	    Category::insert([
 	    	'category_name' => $request->category_name,
 	    	'user_id' => Auth::user()->id,
 	    	'created_at' => Carbon::now()
 	    ]);
+
+
+	    //Method 2 of ORM
+	   /* $category = new Category;
+	    $category->category_name = $request->category_name;
+	    $category->user_id = Auth::user()->id;
+	    $category->save();*/
+
+	    return Redirect()->back()->with('success', 'Category inserted successfully');
 
     }
 }

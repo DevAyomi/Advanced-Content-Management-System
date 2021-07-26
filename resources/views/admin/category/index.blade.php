@@ -10,24 +10,39 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+               @if(session('success'))
+
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      <strong>{{  session('success')  }}</strong>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                @endif
               <div class="card-header">All Ctegories</div>
                       <table class="table">
                         <thead>
                           <tr>
                             <th scope="col">S.N</th>
+                            <th scope="col">Category Name</th>
                             <th scope="col">Username</th>
-                            <th scope="col">Email</th>
                             <th scope="col">Created At</th>
                           </tr>
                         </thead>
                         <tbody>
+
+                          @php($i = 1)
+                          @foreach($categories as $category)
                           <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$i++}}</td>
+                            <td>{{$category->category_name}}</td>
+                            <td>{{$category->user_id}}</td>
+                            <td>{{$category->created_at->diffForHumans()}}</td>
                           </tr>
                         </tbody>
+
+                        @endforeach
                       </table>
                    </div>
                  </div>

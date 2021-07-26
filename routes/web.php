@@ -23,6 +23,7 @@ Route::get('/', function () {
 
 //Category Route
 Route::get('category/all', [category_controller::class, 'allCat'])->name('AllCategory');
+
 Route::post('category/add', [category_controller::class, 'addCat'])->name('store.category');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -34,3 +35,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 	$users = DB::table('users')->get();
     return view('dashboard', compact('users'));
 })->name('dashboard');
+
