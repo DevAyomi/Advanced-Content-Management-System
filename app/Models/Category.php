@@ -12,4 +12,10 @@ class Category extends Model
 
     //Declare Fillable properties here
      public $fillable = [ 'user_id', 'category_name' ];
+
+
+     public function user(){
+
+     	return $this->hasOne(User::class, 'id', 'user_id');
+     }
 }

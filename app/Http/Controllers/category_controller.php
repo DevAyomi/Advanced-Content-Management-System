@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use Auth;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 class category_controller extends Controller
@@ -14,7 +15,8 @@ class category_controller extends Controller
 
     public function allCat(){
 
-    	$categories = Category::latest()->get();
+    	$categories = Category::latest()->paginate(4);
+    	/*$categories = DB::table('categories')->latest()->paginate(4);*/
     	return view('admin.category.index', compact('categories'));
     }
 
